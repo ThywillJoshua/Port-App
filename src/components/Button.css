@@ -1,0 +1,22 @@
+.btns {
+  display: flex;
+  gap: 1rem;
+  justify-self: center;
+  align-self: center;
+}
+
+.btn {
+  cursor: pointer;
+  padding: 1.6rem 2.4rem;
+
+  background-color: #66666e;
+  border-radius: 0.5rem;
+  border: 0.2rem;
+  color: #f0f0f0;
+
+  font-size: 1.6rem;
+}
+
+.btn:hover {
+  background-color: #66666ed1;
+}
