@@ -96,7 +96,7 @@ function App() {
       <div className="btns">
         <Button handler={recieveShipHandler} userAction={"Recieve Ship"} />
         <Button handler={unloadHandler} userAction={"Unload"} />
-        <Button handler={sendTrainHandler} userAction={"Recieve Ship"} />
+        <Button handler={sendTrainHandler} userAction={"Send Train"} />
       </div>
     </div>
   );
