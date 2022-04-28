@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
 
 //Components
@@ -10,45 +10,65 @@ import Button from "./components/Button";
 function App() {
   const [isShipInStation, setIsShipInStation] = useState(false);
   const [shipContainerCount, setShipContainerCount] = useState(0);
+  const shipContainerRef = useRef(shipContainerCount);
+
   const [storageContainerCount, setStorageContainerCount] = useState(0);
+  const storageContainerRef = useRef(storageContainerCount);
+
   const [trainContainerCount, setTrainContainerCount] = useState(0);
+  const trainContainerRef = useRef(trainContainerCount);
 
-  // TODO: This is a work around using while loop in react, apparently sets state asynchronously
-  // and advises no to use while loop as it causes an infinite loop
-  const [unload, setUnload] = useState(true);
-
+  // NOTE: This is a work around using while loop in react, apparently it sets state asynchronously
+  //instead using ref stores value synchronously without updating the UI
   useEffect(() => {
-    (() => {
-      const c1 = storageContainerCount >= 1 && trainContainerCount < 3;
-      const c2 = shipContainerCount >= 1 && storageContainerCount < 5;
-
-      if (c1) rightCrane();
-      if (c2) leftCrane();
-    })();
-  }, [unload, storageContainerCount]);
+    if (isShipInStation === true && shipContainerCount === 0) {
+      setIsShipInStation(false);
+    }
+  }, [shipContainerCount]);
 
   //Cranes
   function rightCrane() {
-    setStorageContainerCount(storageContainerCount - 1);
-    setTrainContainerCount(trainContainerCount + 1);
+    storageContainerRef.current = --storageContainerRef.current;
+    trainContainerRef.current = ++trainContainerRef.current;
   }
 
   function leftCrane() {
-    setShipContainerCount(shipContainerCount - 1);
-    setStorageContainerCount(storageContainerCount + 1);
+    shipContainerRef.current = --shipContainerRef.current;
+    storageContainerRef.current = ++storageContainerRef.current;
   }
 
   //Btn Handlers
   function recieveShipHandler() {
     setIsShipInStation(true);
+    shipContainerRef.current = 4;
     setShipContainerCount(4);
   }
 
   function unloadHandler() {
-    setUnload(!unload);
+    while (true) {
+      let quit = false;
+      const c1 =
+        storageContainerRef.current >= 1 && trainContainerRef.current < 3;
+      const c2 =
+        shipContainerRef.current >= 1 && storageContainerRef.current < 5;
+
+      if (c1) {
+        rightCrane();
+      } else if (c2) {
+        leftCrane();
+      } else {
+        setShipContainerCount(shipContainerRef.current);
+        setTrainContainerCount(trainContainerRef.current);
+        setStorageContainerCount(storageContainerRef.current);
+        quit = true;
+      }
+
+      if (quit) break;
+    }
   }
 
   function sendTrainHandler() {
+    trainContainerRef.current = 0;
     setTrainContainerCount(0);
   }
 
