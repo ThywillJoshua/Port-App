@@ -1,7 +1,6 @@
 import { useContext, useEffect } from "react";
 import { PortContext } from "./context/PortContext";
 
-//Components
 import TrainContainer from "./components/TrainContainer";
 import ShipContainer from "./components/ShipContainer";
 import StorageContainer from "./components/StorageContainer";
@@ -10,8 +9,6 @@ import Button from "./components/Button";
 function App() {
   const { portState, portDispatch } = useContext(PortContext);
 
-  // NOTE: This is a work around using while loop in react, apparently it sets state asynchronously
-  //instead using ref stores value synchronously without updating the UI
   useEffect(() => {
     if (
       portState.isShipInStation === true &&
@@ -21,8 +18,8 @@ function App() {
     }
   }, [portState.shipContainerCount, portDispatch, portState.isShipInStation]);
 
-  //Render Components
-  function getShipContainer() {
+  
+  function renderShipContainer() {
     const containers = [];
 
     for (let i = 0; i < portState.shipContainerCount; i++) {
@@ -32,7 +29,7 @@ function App() {
     return containers;
   }
 
-  function getStorageContainer() {
+  function renderStorageContainer() {
     const containers = [];
 
     for (let i = 0; i < portState.storageContainerCount; i++) {
@@ -42,7 +39,7 @@ function App() {
     return containers;
   }
 
-  function getTrainContainer() {
+  function renderTrainContainer() {
     const containers = [];
 
     for (let i = 0; i < portState.trainContainerCount; i++) {
@@ -55,11 +52,11 @@ function App() {
   return (
     <div className="port">
       <div className="port-container">
-        <div className="port-container--ship">{getShipContainer()}</div>
+        <div className="port-container--ship">{renderShipContainer()}</div>
 
-        <div className="port-container--storage">{getStorageContainer()} </div>
+        <div className="port-container--storage">{renderStorageContainer()} </div>
 
-        <div className="port-container--train">{getTrainContainer()}</div>
+        <div className="port-container--train">{renderTrainContainer()}</div>
       </div>
 
       <div className="btns">
