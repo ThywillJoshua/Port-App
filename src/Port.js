@@ -1,6 +1,5 @@
 import { useContext, useEffect } from "react";
 import { PortContext } from "./context/PortContext";
-import "./Port.css";
 
 //Components
 import TrainContainer from "./components/TrainContainer";

@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+  }
+  
+  html {
+    font-size: 62.5%;
+  }
+  
+  /* 700px Screen Size*/
+  @media (max-width: 44em) {
+    html {
+      font-size: 55%;
+    }
+  }
+  
+  /* 550px Screen Size*/
+  @media (max-width: 34em) {
+    html {
+      font-size: 46%;
+    }
+  }
+
+  @import "./Port";
+  @import "./Button";
