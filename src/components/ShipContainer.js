@@ -1,3 +1,5 @@
 export default function ShipContainer({ number }) {
-  return <div className="ship-container">Ship container {number}</div>;
+  return (
+    <div className="port-container--ship--box">Ship container {number}</div>
+  );
 }

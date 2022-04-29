@@ -9,11 +9,14 @@ html {
   font-size: 62.5%;
 }
 
+/* 700px Screen Size*/
 @media (max-width: 44em) {
   html {
     font-size: 55%;
   }
 }
+
+/* 550px Screen Size*/
 @media (max-width: 34em) {
   html {
     font-size: 46%;

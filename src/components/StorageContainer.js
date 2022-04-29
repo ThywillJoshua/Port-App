@@ -1,3 +1,7 @@
 export default function StorageContainer({ number }) {
-  return <div className="storage-container">Storage container {number}</div>;
+  return (
+    <div className="port-container--storage--box">
+      Storage container {number}
+    </div>
+  );
 }
